@@ -2,7 +2,7 @@
   "name": "secure-mission-game",
   "version": "1.0.0",
   "description": "",
-  "main": "Server.js",
+  "main": "index.js",
   "dependencies": {
     "accepts": "^1.3.8",
     "adler-32": "^1.3.1",

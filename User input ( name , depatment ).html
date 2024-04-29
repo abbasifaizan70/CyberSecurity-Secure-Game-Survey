@@ -148,7 +148,7 @@
       var employeeName = document.getElementById("employeeName").value;
       var department = document.getElementById("department").value;
 
-      $.post("http://localhost:3000/submit", {
+      $.post("https://cyber-security-secure-game-survey.vercel.app/submit", {
         employeeName: employeeName,
         department: department
       }, function (response) {
