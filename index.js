@@ -11,9 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "Cybersecurity Secure Game.html"));
-});
 
 app.post("/submit", (req, res) => {
   const { employeeName, department } = req.body;
