@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cyber Secure Mission</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: rows;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('images/IMG_7386.WEBP');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+
+
+    .button {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: black;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+      margin-top: 500px;
+    }
+
+    .button:hover {
+      background-color: #ff5722;
+    }
+
+    .button:not(:last-child) {
+      margin-right: 20px;
+    }
+    .button:disabled {
+      background-color: grey; /* Disabled button color */
+      cursor: not-allowed;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="background-image"></div>
+    <div class="content">
+      <!-- Buttons with onclick event calling the saveStageChoice function -->
+      <button class="button" id="passButton" onclick="saveStageChoice('Pass the ID Card for him')">Pass the ID Card for him</button>
+      <button class="button" id="verifyButton" onclick="saveStageChoice('Verify Faisals identity')">Verify Faisal's identity</button>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function saveStageChoice(choice) {
+      let employeeName = localStorage.getItem('employeeName');
+
+      // Disable both buttons as soon as a choice is made
+      $('#passButton').prop('disabled', true);
+      $('#verifyButton').prop('disabled', true);
+
+      $.post("http://localhost:3000/saveStage", {
+        employeeName: employeeName,
+        stage: 4, // Specify the stage number
+        choice: choice // The choice made by the user
+      }, function (response) {
+        if (response.success) {
+          // Since this is the last stage, we can remove the employeeName from localStorage
+          localStorage.setItem('stage4Choice', choice);
+          // Redirect based on the choice made in stage 4
+          window.location.href = choice === 'Pass the ID Card for him' ? 'exit stage 4.html' : 'right answer stage 4.html';
+
+        } else {
+          alert("Failed to save your choice.");
+          // Re-enable buttons if save fails
+          $('#passButton').prop('disabled', false);
+          $('#verifyButton').prop('disabled', false);
+        }
+      }).fail(function (jqXHR, textStatus) {
+        console.error("Request failed: " + textStatus);
+        // Re-enable buttons if request fails
+        $('#passButton').prop('disabled', false);
+        $('#verifyButton').prop('disabled', false);
+      });
+    }
+
+    function checkStage4Choice() {
+      let stage4Choice = localStorage.getItem('stage4Choice');
+      if(stage4Choice) {
+        // Disable the buttons if a choice for stage 4 has already been made
+        $('#passButton').prop('disabled', true);
+        $('#verifyButton').prop('disabled', true);
+      }
+    }
+
+    // Call this function on page load and when navigated back using the browser's back button
+    $(window).on('load pageshow', checkStage4Choice);
+  </script>
+</body>
+</html>

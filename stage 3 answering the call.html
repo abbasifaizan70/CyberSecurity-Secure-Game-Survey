@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cyber Secure Mission</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+
+    .background-image {
+      background-image: url('images/IMG_7231.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .paragraph {
+      opacity: 0;
+      animation: fadeIn 5s forwards;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 20px;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-image">
+    <div id="paragraph1" class="paragraph">
+      <p> Ali: Hello, who is this ? </p>
+    </div>
+    <div id="paragraph2" class="paragraph">
+      <p> Khalid: Hi Ali, How are you? I’m Khalid from the university club, we used to work together in multiple
+        projects, do you remember me ? </p>
+    </div>
+
+
+
+  </div>
+
+  <script>
+
+    // JavaScript code to redirect to another page after a delay
+    window.onload = function () {
+      setTimeout(function () {
+        window.location.href = "chatting on the phone stage 3.html";
+      }, 25000); // 3000 milliseconds = 3 seconds
+
+    };
+  </script>
+
+  <script>
+    // Set the time interval between each paragraph
+    const paragraphInterval = 150000;
+
+    // Variables to keep track of the current paragraph and timer
+    let currentParagraphIndex = 0;
+    let timer;
+
+    // Function to display the next paragraph
+    function showNextParagraph() {
+      const currentParagraph = document.getElementById(paragraph${ currentParagraphIndex + 1});
+    currentParagraph.style.display = "block";
+
+    // Increment the current paragraph index
+    currentParagraphIndex++;
+
+    // If all paragraphs have been displayed, show the next button
+    if (currentParagraphIndex === 3) {
+      document.getElementById("nextButton").style.display = "block";
+    } else {
+      // Otherwise, start the timer for the next paragraph
+      timer = setTimeout(showNextParagraph, paragraphInterval);
+    }
+    }
+
+    // Start the timer for the first paragraph
+    timer = setTimeout(showNextParagraph, paragraphInterval);
+
+    // Add event listener to the next button
+    document.getElementById("nextButton").addEventListener("click", function () {
+      // Redirect the user to the next web page
+      window.location.href = "next-page.html";
+    });
+
+
+
+  </script>
+</body>
+
+</html>

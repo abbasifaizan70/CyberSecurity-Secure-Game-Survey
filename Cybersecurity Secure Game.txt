@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('images/home.PNG');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+ 
+    .start-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff9800;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+ 
+    .start-button:hover {
+      background-color: #ff5722;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Header Text</h1>
+    <p>Paragraph Text</p>
+    <button class="start-button">Start Game</button>
+  </div>
+</body>
+</html>

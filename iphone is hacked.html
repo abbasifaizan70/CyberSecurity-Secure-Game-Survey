@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cyber Secure Mission</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+
+    .container {
+      position: relative;
+    }
+
+    .container img {
+      display: block;
+      margin: 0 auto;
+      max-width: 30%;
+      height: auto;
+    }
+
+    .container h2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      margin-bottom: 50px;
+    }
+
+    .next-button {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: white;
+      border: none;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .next-button:hover {
+      background-color: #ff5722;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="wrong answer stage 1.html" button id="nextButton" class="next-button">Next</button>
+
+    <div class="container">
+      <img src="images/IMG_7055.jpg" alt="Image">
+      <h2>Your iPhone has been hacked</h2>
+    </div>
+    <script>
+      // JavaScript code to redirect to another page after a delay
+      window.onload = function () {
+        setTimeout(function () {
+          window.location.href = "wrong answer stage 1.html";
+        }, 3000); // 3000 milliseconds = 3 seconds
+      };
+    </script>
+</body>
+
+</html>

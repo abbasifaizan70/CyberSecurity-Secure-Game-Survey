@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cyber Secure Mission</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: rows;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('images/phishing email .jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: black;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+      margin-top: 600px;
+    }
+
+    .button:hover {
+      background-color: #ff5722;
+    }
+
+    .button:not(:last-child) {
+      margin-right: 20px;
+    }
+    .button:disabled {
+      background-color: grey; /* Disabled button color */
+      cursor: not-allowed;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="background-image"></div>
+    <div class="content">
+      <!-- Buttons with onclick event calling the saveStageChoice function -->
+      <button class="button" id="linkButton" onclick="saveStageChoice('Click on the link')">Click on the link</button>
+      <button class="button" id="reportButton" onclick="saveStageChoice('Report as SPAM')">Report as SPAM</button>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function saveStageChoice(choice) {
+      let employeeName = localStorage.getItem('employeeName');
+
+      // Disable both buttons as soon as a choice is made
+      $('#linkButton').prop('disabled', true);
+      $('#reportButton').prop('disabled', true);
+
+      $.post("http://localhost:3000/saveStage", {
+        employeeName: employeeName,
+        stage: 3, // Specify the stage number
+        choice: choice // The choice made by the user
+      }, function (response) {
+        if (response.success) {
+          // Store the choice in localStorage for stage 3
+          localStorage.setItem('stage3Choice', choice);
+          // Redirect based on the choice made in stage 3
+          window.location.href = choice === 'Click on the link' ? 'wrong answer stage 3.html' : 'right answer stage 3.html';
+        } else {
+          alert("Failed to save your choice.");
+          // Re-enable buttons if save fails
+          $('#linkButton').prop('disabled', false);
+          $('#reportButton').prop('disabled', false);
+        }
+      }).fail(function (jqXHR, textStatus) {
+        console.error("Request failed: " + textStatus);
+        // Re-enable buttons if request fails
+        $('#linkButton').prop('disabled', false);
+        $('#reportButton').prop('disabled', false);
+      });
+    }
+
+    function checkStage3Choice() {
+      let stage3Choice = localStorage.getItem('stage3Choice');
+      if(stage3Choice) {
+        // Disable the buttons if a choice for stage 3 has already been made
+        $('#linkButton').prop('disabled', true);
+        $('#reportButton').prop('disabled', true);
+      }
+    }
+
+    // Call this function on page load and when navigated back using the browser's back button
+    $(window).on('load pageshow', checkStage3Choice);
+  </script>
+</body>
+</html>
