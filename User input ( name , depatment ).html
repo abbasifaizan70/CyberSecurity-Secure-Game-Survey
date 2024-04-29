@@ -72,8 +72,6 @@
 
     }
 
-
-
     label {
       font-weight: bold;
       margin-right: 10px;
@@ -92,13 +90,6 @@
       padding: 20px;
 
     }
-
-
-
-
-
-
-
     .submit-button {
       padding: 10px 20px;
       font-size: 20px;
@@ -148,7 +139,7 @@
       var employeeName = document.getElementById("employeeName").value;
       var department = document.getElementById("department").value;
 
-      $.post("https://cyber-security-secure-game-survey.vercel.app/submit", {
+      $.post("http://localhost:3000/submit", {
         employeeName: employeeName,
         department: department
       }, function (response) {
